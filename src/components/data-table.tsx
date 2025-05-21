@@ -8,6 +8,7 @@ import {
 	useReactTable,
 	type SortingState,
 } from '@tanstack/react-table';
+import { Checkbox } from './ui/checkbox';
 
 type Article = {
 	id: number;
@@ -118,19 +119,17 @@ export default function ArticleTable() {
 		columnHelper.display({
 			id: 'select',
 			header: ({ table }) => (
-				<input
-					type='checkbox'
+				<Checkbox
 					checked={table.getIsAllPageRowsSelected()}
-					onChange={(e) => table.toggleAllPageRowsSelected(!!e.target.checked)}
-					className='h-4 w-4'
+					onCheckedChange={(checked) =>
+						table.toggleAllPageRowsSelected(!!checked)
+					}
 				/>
 			),
 			cell: ({ row }) => (
-				<input
-					type='checkbox'
+				<Checkbox
 					checked={row.getIsSelected()}
-					onChange={(e) => row.toggleSelected(!!e.target.checked)}
-					className='h-4 w-4'
+					onCheckedChange={(checked) => row.toggleSelected(!!checked)}
 				/>
 			),
 		}),
